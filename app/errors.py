@@ -18,6 +18,8 @@ MESSAGES = {
     "GATE_BLOCKED": "存在阻断项，不能签发",
     "NOT_APPROVED": "批次尚未签发",
     "BAD_REQUEST": "请求内容不完整",
+    "STOCKTAKE_CONFLICT": "同一盘点单号存在内容不同的提交",
+    "ISSUE_NOT_FOUND": "差异单不存在",
 }
 
 

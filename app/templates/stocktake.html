@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>库房盘点对账台</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stocktake.css') }}">
+</head>
+<body class="p0847">
+<div class="st-shell">
+  <header class="st-toolbar">
+    <div>
+      <p class="actor">库房管理员</p>
+      <h1>库房盘点对账台 · 差异单签发</h1>
+      <p class="st-rule">在途不计短缺 · 逾期记发出库位短缺 · 重号不相抵 · 截点前凭据才采信 · 重试不重复登记</p>
+    </div>
+    <div class="st-tools">
+      <label>样例
+        <select id="profile">
+          <option value="clean">clean（覆盖全部规则）</option>
+          <option value="dirty">dirty（校验拒绝）</option>
+        </select>
+      </label>
+      <button id="load-sample" type="button">载入样例</button>
+      <button id="submit" type="button" class="primary">对账并签发差异单</button>
+      <button id="refresh" type="button">刷新已签发</button>
+    </div>
+  </header>
+
+  <section class="st-inputs">
+    <article class="st-panel">
+      <div class="st-panel-head"><h2>盘点提交（JSON）</h2><span class="hint" id="payload-hint">尚未载入</span></div>
+      <textarea id="payload" spellcheck="false" placeholder="载入样例或粘贴盘点提交"></textarea>
+    </article>
+  </section>
+
+  <section class="st-kpis" aria-label="差异汇总">
+    <div class="st-kpi" id="kpi-transit"><b>0</b><span>在途</span></div>
+    <div class="st-kpi" id="kpi-shortage"><b>0</b><span>短缺</span></div>
+    <div class="st-kpi" id="kpi-duplicate"><b>0</b><span>重号</span></div>
+    <div class="st-kpi" id="kpi-surplus"><b>0</b><span>多出</span></div>
+  </section>
+
+  <section class="st-board">
+    <article class="st-panel">
+      <div class="st-panel-head"><h2>在途（不计短缺）</h2></div>
+      <table><thead><tr><th>样品</th><th>发出库位</th><th>目的库位</th><th>约定签收日</th><th>凭据</th></tr></thead>
+      <tbody id="transit-body"></tbody></table>
+    </article>
+    <article class="st-panel">
+      <div class="st-panel-head"><h2>短缺</h2></div>
+      <table><thead><tr><th>样品</th><th>库位</th><th>原因</th><th>说明</th></tr></thead>
+      <tbody id="shortage-body"></tbody></table>
+    </article>
+    <article class="st-panel">
+      <div class="st-panel-head"><h2>重号（不相抵）</h2></div>
+      <table><thead><tr><th>样品</th><th>盘到库位</th><th>说明</th></tr></thead>
+      <tbody id="duplicate-body"></tbody></table>
+    </article>
+    <article class="st-panel">
+      <div class="st-panel-head"><h2>多出</h2></div>
+      <table><thead><tr><th>样品</th><th>库位</th><th>说明</th></tr></thead>
+      <tbody id="surplus-body"></tbody></table>
+    </article>
+    <article class="st-panel">
+      <div class="st-panel-head"><h2>未采信凭据（截点后/同时提交）</h2></div>
+      <table><thead><tr><th>样品</th><th>凭据</th><th>原因</th></tr></thead>
+      <tbody id="ignored-body"></tbody></table>
+    </article>
+  </section>
+
+  <section class="st-issued">
+    <article class="st-panel">
+      <div class="st-panel-head"><h2>已签发差异单核对</h2><span class="hint" id="issued-hint"></span></div>
+      <table><thead><tr><th>差异单号</th><th>盘点单号</th><th>签发时间</th><th>内容指纹</th><th></th></tr></thead>
+      <tbody id="issued-body"></tbody></table>
+    </article>
+  </section>
+
+  <footer class="st-status"><span id="notice"></span></footer>
+</div>
+<script src="{{ url_for('static', filename='stocktake.js') }}"></script>
+</body>
+</html>

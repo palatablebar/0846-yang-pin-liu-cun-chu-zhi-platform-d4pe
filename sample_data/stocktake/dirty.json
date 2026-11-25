@@ -1,0 +1,15 @@
+{
+  "stocktake_id": "ST-2026-1125-BAD",
+  "warehouse": "中心样本库二号库",
+  "cutoff": "2026-11-25",
+  "book_records": [
+    {"location": "A-10", "sample_id": "SP-101"}
+  ],
+  "count_records": [
+    {"location": "A-10", "sample_id": "SP-101"}
+  ],
+  "transfer_vouchers": [
+    {"voucher_id": "TV-900", "sample_id": "", "from_location": "A-10", "to_location": "B-10", "due_date": "2026-11-30", "registered_at": "2026-11-20"}
+  ],
+  "receipt_vouchers": []
+}
